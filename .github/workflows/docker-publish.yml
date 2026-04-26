@@ -1,0 +1,32 @@
+name: Deploy do To-Do App para o Docker Hub
+
+# Aciona o robô toda vez que fizermos push na branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-e-push:
+    runs-on: ubuntu-latest # O computador que o robô vai usar
+
+    steps:
+      # Passo 1: O robô baixa o seu código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: O robô faz login no Docker Hub usando seus Secrets
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_ERIKLINS}}
+          password: ${{ secrets.DOCKERHUB_DCKR_PAT_4EEWUE0DA6SM6LFVHECCCNGCF1K}}
+
+      # Passo 3: O robô executa o Build e faz o Push automaticamente
+      - name: Build e Push da Imagem
+        uses: docker/build-push-action@v5
+        with:
+          context: . # Usa a pasta raiz do projeto
+          push: true # Envia para o registry
+          # Mude "seu-usuario" para o seu usuário real abaixo!
+          tags: seu-usuario/todo-app:latest
