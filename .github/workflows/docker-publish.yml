@@ -20,7 +20,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_ERIKLINS}}
-          password: ${{ secrets.DOCKERHUB_DCKR_PAT_4EEWUE0DA6SM6LFVHECCCNGCF1K}}
+          password: ${{ secrets.DOCKER_PASSWORD}}
 
       # Passo 3: O robô executa o Build e faz o Push automaticamente
       - name: Build e Push da Imagem
@@ -29,4 +29,4 @@ jobs:
           context: . # Usa a pasta raiz do projeto
           push: true # Envia para o registry
           # Mude "seu-usuario" para o seu usuário real abaixo!
-          tags: seu-usuario/todo-app:latest
+          tags: eriklins/todo-app:latest
