@@ -20,7 +20,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_ERIKLINS}}
-          password: ${{ secrets.DOCKERHUB}}
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
 
       # Passo 3: O robô executa o Build e faz o Push automaticamente
       - name: Build e Push da Imagem
