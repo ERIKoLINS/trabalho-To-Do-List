@@ -1,0 +1,50 @@
+name: Deploy do To-Do App para o Docker Hub
+
+# Aciona o robô toda vez que fizermos push na branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-e-push:
+    runs-on: ubuntu-latest # O computador que o robô vai usar
+
+    steps:
+      # Passo 1: O robô baixa o seu código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: O robô faz login no Docker Hub usando seus Secrets
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_ERIKLINS}}
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
+
+      # Passo 3: O robô executa o Build e faz o Push automaticamente
+      - name: Build e Push da Imagem
+        uses: docker/build-push-action@v5
+        with:
+          context: . # Usa a pasta raiz do projeto
+          push: true # Envia para o registry
+          # Mude "seu-usuario" para o seu usuário real abaixo!
+          tags: eriklins/todo-app:latest
+
+          deploy-azure:
+    runs-on: ubuntu-latest
+    needs: build-e-push # Só faz deploy se a imagem foi publicada com sucesso
+
+    steps:
+      # Passo 1: Baixa o código (necessário para a action da Azure)
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: Faz o deploy da imagem do Docker Hub no Azure App Service
+      - name: Deploy no Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          # Troque pelo nome do seu App Service no portal Azure
+          app-name: 'carrinho-sample'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: 'eriklins/todo-app:v1'

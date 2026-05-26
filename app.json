@@ -1,29 +1,23 @@
 {
-  "expo": {
-    "name": "ToDo",
-    "slug": "ToDo",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/app_logo.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/app_logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#FFFFFF"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/app_logo.png",
-        "backgroundColor": "#515CC6"
-      },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^15.1.1",
+    "@react-native-async-storage/async-storage": "^3.0.2",
+    "expo": "~54.0.33",
+    "expo-checkbox": "^55.0.4",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-emoji-chooser": "^0.1.11",
+    "rn-emoji-keyboard": "^1.7.0"
+  },
+  "private": true
 }
