@@ -45,6 +45,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           # Troque pelo nome do seu App Service no portal Azure
-          app-name: 'carrinho-sample'
+          app-name: 'todo-eriklins'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: 'eriklins/todo-app:v1'
