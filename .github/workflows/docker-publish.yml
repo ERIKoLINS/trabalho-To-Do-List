@@ -3,8 +3,7 @@ name: Deploy do To-Do App para o Docker Hub
 on:
   push:
     branches:
-      - master
-      
+      - main
 jobs:
   build-e-push:
     runs-on: ubuntu-latest
